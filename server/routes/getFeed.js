@@ -16,6 +16,7 @@ router.get('/', function (req, res, next) {
 					'SELECT * FROM rss_url')
 				.then(function (result) {
 					client.release();
+					next();
 					// res.send(result.rows);
 					var req = request(result)
 					var feedparser = new feed([]);
@@ -38,6 +39,10 @@ router.get('/', function (req, res, next) {
 		});
 });
 
+
+["api", "twitter", "facebook", "maps", "flickr", "delicious", "meme", "yahoo", "google"]
+
+'{api, twitter, facebook, maps, flickr, delicious, meme, yahoo, google}'
 
 
 

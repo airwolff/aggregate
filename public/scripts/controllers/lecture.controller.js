@@ -2,9 +2,7 @@
 // 				console.log('LectureController up and running');
 // 				var self = this;
 // 				self.article = {};
-// 				self.newBudget = {};
 // 				self.lectureArticles = [];
-// 				self.factory = DataFactory;
 //
 // 				getLecture();
 //
