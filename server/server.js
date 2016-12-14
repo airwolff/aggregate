@@ -2,19 +2,17 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
-var getUrl = require('./routes/getUrl.js');
-var parser = require('./routes/parser.js');
+var getArticle = require('./routes/getArticle');
 var portDecision = process.env.PORT || 3000;
 
 // middleware
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 //routing modules
-app.use('/getUrl', getUrl);
-app.use('/parser', parser);
+app.use('/getArticle', getArticle);
 
 app.get('/', function (req, res) {
 	res.sendFile(path.resolve('./public/views/index.html'));

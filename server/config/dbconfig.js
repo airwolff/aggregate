@@ -1,5 +1,5 @@
 var config = {
-  database: 'aggregate'
+	database: 'Hal-9000'
 };
 
 module.exports = config;

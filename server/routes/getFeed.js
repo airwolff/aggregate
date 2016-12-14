@@ -18,17 +18,26 @@ router.get('/', function (req, res, next) {
 					client.release();
 					next();
 					// res.send(result.rows);
-					var req = request(result)
+					var req = request(result);
 					var feedparser = new feed([]);
-					feedparser.on('error', callback);
-					feedparser.on('readable', function () {
-						var stream = this
-						var meta = this.meta
-						var item;
 
-						while (item = stream.read()) {
-							console.log(item);
-						}
+					req.on('error', function (error) {
+					  // handle any request errors
+					});
+					req.on('response', function (res) {
+					  var stream = this;
+					  if (res.statusCode != 200) return this.emit('error', new Error('Bad status code'));
+					  stream.pipe(feedparser);
+					});
+					feedparser.on('error', function(error) {
+					});
+					feedparser.on('readable', function() {
+					  var stream = this;
+					  var meta = this.meta;
+					  var item;
+					  while (item = stream.read()) {
+					    console.log(item, meta, stream);
+					  }
 					});
 				})
 				.catch(function (err) {
@@ -38,15 +47,5 @@ router.get('/', function (req, res, next) {
 				});
 		});
 });
-
-
-["api", "twitter", "facebook", "maps", "flickr", "delicious", "meme", "yahoo", "google"]
-
-'{api, twitter, facebook, maps, flickr, delicious, meme, yahoo, google}'
-
-
-
-
-
 
 module.exports = router;
